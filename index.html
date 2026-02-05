@@ -306,15 +306,6 @@
           console.log("Render được gọi! MODE:", MODE);
           app.innerHTML = "";
 
-          // Test nhanh (xóa dòng này sau khi test OK nếu muốn sạch)
-          const testP = document.createElement("p");
-          testP.style.color = "red";
-          testP.style.fontWeight = "bold";
-          testP.style.textAlign = "center";
-          testP.textContent =
-            "TEST: JS đang chạy và render() OK! Nội dung lớp học sẽ hiện dưới đây.";
-          app.appendChild(testP);
-
           for (const grade in DATA) {
             const card = document.createElement("div");
             card.className = "card";
@@ -443,4 +434,5 @@
     </center>
   </body>
 </html>
+
 
