@@ -2,434 +2,465 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ngữ văn THPT – Kết nối tri thức</title>
+
     <style>
-      body {
-        font-family: "Segoe UI", sans-serif;
-        background: #eef2f7;
-        padding: 20px;
+      :root {
+        --bg-main: #ffedb3; /* nền giấy */
+        --card-bg: rgb(235, 197, 197);
+        --border-soft: rgba(0, 0, 0, 0.18);
+        --accent: #355c7d; /* xanh học thuật */
+        --accent-soft: #e8eef4;
+        --text-main: #2e2a26;
+        --text-sub: #5f5b55;
+        --hover-bg: #f3eadb;
       }
 
+      /* ===== BODY ===== */
+      body {
+        margin: 0;
+        padding: clamp(14px, 4vw, 28px);
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+      }
+
+      /* ===== TITLE ===== */
       h1 {
         text-align: center;
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+        margin-bottom: 24px;
+        letter-spacing: 0.5px;
       }
 
+      /* ===== TOP BAR ===== */
       .top-bar {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
       }
 
-      button {
-        padding: 8px 16px;
-        border-radius: 12px;
+      .top-bar button {
+        font-size: clamp(0.9rem, 2.8vw, 1rem);
+        padding: 10px 18px;
+        border-radius: 999px;
         border: none;
-        background: #3b6fd8;
-        color: white;
+        background: var(--accent);
+        color: #fff;
         cursor: pointer;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
       }
 
+      /* ===== CARD (LỚP) ===== */
       .card {
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(6px);
-        border-radius: 18px;
-        padding: 18px;
-        margin-bottom: 22px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        background: var(--card-bg);
+        backdrop-filter: blur(10px);
+        border-radius: 22px;
+        padding: clamp(16px, 3vw, 24px);
+        margin-bottom: 26px;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+        border: 1px solid var(--border-soft);
       }
 
+      /* ===== LỚP ===== */
       .grade {
-        font-size: 20px;
-        font-weight: bold;
+        text-align: center;
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+        font-weight: 700;
         cursor: pointer;
+        padding: 10px;
+        border-radius: 14px;
+        transition: background 0.25s;
       }
 
+      .grade:hover {
+        background: var(--hover-bg);
+      }
+
+      /* ===== BÀI ===== */
       .lesson {
-        margin-top: 12px;
-        padding: 12px 14px;
-        border-radius: 12px;
-        background: #e4ecff;
-        cursor: pointer;
+        margin-top: 14px;
+        padding: 14px;
+        border-radius: 16px;
+        background: var(--accent-soft);
+        font-size: clamp(1rem, 3vw, 1.15rem);
         font-weight: 600;
-      }
-
-      .text {
-        margin-left: 18px;
-        margin-top: 8px;
-        padding: 10px 14px;
-        border-radius: 10px;
-        background: #f4f6fb;
         cursor: pointer;
+        text-align: center;
+        transition: background 0.25s;
       }
 
+      .lesson:hover {
+        background: #dfe8f2;
+      }
+
+      /* ===== VĂN BẢN ===== */
+      .text {
+        margin-top: 10px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: #fffdf9;
+        cursor: pointer;
+        font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+        text-align: center;
+        border: 1px dashed var(--border-soft);
+        transition: background 0.25s;
+      }
+
+      .text:hover {
+        background: var(--hover-bg);
+      }
+
+      /* ===== CONTAINER CON ===== */
       .box,
       .options {
         overflow: hidden;
         max-height: 0;
         opacity: 0;
-        transition: max-height 0.45s ease, opacity 0.25s ease;
+        transition: max-height 0.45s ease, opacity 0.3s ease;
         margin-left: 18px;
         padding-left: 14px;
-        border-left: 2px solid rgba(0, 0, 0, 0.08);
+        border-left: 2px solid var(--border-soft);
       }
 
       .box.show,
       .options.show {
-        max-height: 1000px;
+        max-height: 2000px;
         opacity: 1;
       }
 
+      /* ===== OPTION ===== */
       .option {
-        margin: 6px 0;
+        margin: 8px 0;
+        font-size: clamp(0.9rem, 2.7vw, 1rem);
+      }
+
+      .option a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .option a:hover {
+        text-decoration: underline;
       }
 
       .option input[type="text"] {
-        width: 65%;
-        padding: 4px;
-        margin-top: 4px;
-      }
-      /* giữ nguyên toàn bộ CSS cũ */
-
-      .add-option {
-        margin-top: 10px;
-      }
-
-      .add-option input {
-        padding: 4px;
-        width: 60%;
-      }
-
-      .add-option button {
-        margin-left: 6px;
-        padding: 4px 10px;
+        width: 100%;
+        margin-top: 6px;
+        padding: 6px 8px;
         border-radius: 8px;
+        border: 1px solid var(--border-soft);
+        font-size: 0.95rem;
+      }
+
+      /* ===== MOBILE TỐI ƯU ===== */
+      @media (max-width: 600px) {
+        .card {
+          border-radius: 18px;
+        }
+        .box,
+        .options {
+          margin-left: 10px;
+          padding-left: 10px;
+        }
+      }
+      .top-bar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 28px;
+      }
+
+      #modeBtn {
+        padding: 12px 26px;
+        border-radius: 999px;
+        font-size: clamp(0.95rem, 3vw, 1.05rem);
+        font-weight: 600;
         border: none;
-        background: #4caf50;
-        color: white;
+        background: linear-gradient(135deg, #7ab9f0, #6c8ebf);
+        color: #fff;
         cursor: pointer;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      #modeBtn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
       }
     </style>
   </head>
+
   <body>
     <h1>📚 Ngữ văn THPT – Kết nối tri thức</h1>
 
-      <div class="top-bar">
-        <button id="modeBtn">🎓 Chế độ: Học sinh</button>
-      </div>
+    <div class="top-bar">
+      <button id="modeBtn">🎓 Học sinh</button>
+      <button id="shareBtn" style="display: none">🔗 Tạo link chia sẻ</button>
+    </div>
 
-      <div id="app"></div>
+    <div id="app"></div>
 
     <script>
-      console.log("Script bắt đầu chạy!");
+      /* ===== MODE ===== */
+      let MODE = "student";
 
-      try {
-        let MODE = "student";
+      /* ===== OPTIONS ===== */
+      const OPTIONS = [
+        { key: "author", label: "📘 Kiến thức trọng tâm" },
+        { key: "video", label: "🎥 Video bài học" },
+        { key: "practice", label: "📝 Câu hỏi ôn tập" },
+      ];
 
-        const OPTIONS = [
-          { key: "author", label: "👤 Giới thiệu tác giả" },
-          { key: "work", label: "📘 Giới thiệu tác phẩm" },
-          { key: "video", label: "🎥 Video bài học" },
-          { key: "practice", label: "📝 Câu hỏi ôn tập" },
-        ];
+      /* ===== DATA KHUNG (KHÔNG LINK) ===== */
+      const STRUCTURE = {
+        10: {
+          "Bài 1: Sức hấp dẫn của truyện kể": [
+            "Truyện về các vị thần sáng tạo thế giới (Thần thoại Việt Nam)",
+            "Tản Viên từ Phán sự lục (Chuyện chức Phán sự đền Tản Viên – Nguyễn Dữ)",
+            "Chữ người tử tù (Nguyễn Tuân)",
+          ],
+          "Bài 2: Vẻ đẹp của thơ ca": [
+            "Chùm thơ hai-cư (haiku) Nhật Bản",
+            "Thu hứng (Cảm xúc mùa thu – Đỗ Phủ)",
+            "Mùa xuân chín (Hàn Mặc Tử)",
+            "Bản hòa âm ngôn từ trong Tiếng thu của Lưu Trọng Lư (Chu Văn Sơn)",
+          ],
+          "Bài 3: Nghệ thuật thuyết phục trong văn nghị luận": [
+            "Hiền tài là nguyên khí của quốc gia (Thân Nhân Trung)",
+            "Yêu và đồng cảm (Phong Tử Khải)",
+            "Chữ bầu lên nhà thơ (Lê Đạt)",
+          ],
+          "Bài 4: Sức sống của sử thi": [
+            "Héc-ta từ biệt Ăng-đrô-mác (Trích I-li-át – Hô-me-rơ)",
+            "Đăm Săn đi bắt Nữ Thần Mặt Trời (Trích sử thi Ê-đê)",
+          ],
+          "Bài 5: Tích trò sân khấu dân gian": [
+            "Xúy Vân giả dại (Trích chèo Kim Nham)",
+            "Huyện đường (Trích tuồng Nghêu, Sò, Ốc, Hến)",
+            "Múa rối nước – hiện đại soi bóng tiền nhân (Phạm Thùy Dung)",
+          ],
+          "Bài 6: Nguyễn Trãi – “Dành còn để trợ dân này”": [
+            "Tác gia Nguyễn Trãi",
+            "Bình Ngô đại cáo (Nguyễn Trãi)",
+            "Bảo kính cảnh giới (Gương báu răn mình)",
+            "Dục Thúy sơn (Nguyễn Trãi)",
+          ],
+          "Bài 7: Quyền năng của người kể chuyện": [
+            "Người cầm quyền khôi phục uy quyền (Trích Những người khốn khổ – Victor Hugo)",
+            "Dưới bóng hoàng lan (Thạch Lam)",
+            "Một chuyện đùa nho nhỏ (Anton Chekhov)",
+          ],
+          "Bài 8: Thế giới đa dạng của thông tin": [
+            "Sự sống và cái chết (Trịnh Xuân Thuận)",
+            "Nghệ thuật truyền thống của người Việt (Nguyễn Quân)",
+            "Phục hồi tầng ozone: Thành công hiếm hoi của nỗ lực toàn cầu (Lê My)",
+          ],
+          "Bài 9: Hành trang cuộc sống": [
+            "Về chính chúng ta (Carlo Rovelli)",
+            "Con đường không chọn (Robert Frost)",
+            "Một đời như kẻ tìm đường (Phan Văn Trường)",
+          ],
+        },
 
-        const DATA = {
-          10: {
-            "Bài 1: Thần thoại và sử thi": [
-              "Thần Trụ Trời",
-              "Đăm Săn chiến thắng Mtao Mxây",
-              "Hê-ra-clét đi tìm táo vàng",
-            ],
-            "Bài 2: Truyện ngắn": ["Chữ người tử tù", "Hai đứa trẻ", "Vợ nhặt"],
-            "Bài 3: Thơ trữ tình": ["Tỏ lòng", "Thu hứng", "Nhàn"],
-            "Bài 4: Văn bản nghị luận": [
-              "Chiếu dời đô",
-              "Hịch tướng sĩ",
-              "Bình Ngô đại cáo",
-            ],
-            "Bài 5: Văn bản thông tin": [
-              "Động Phong Nha",
-              "Ca Huế trên sông Hương",
-              "Ai đã đặt tên cho dòng sông",
-            ],
-            "Bài 6: Truyện thơ dân gian": [
-              "Truyện Kiều (trích)",
-              "Lục Vân Tiên cứu Kiều Nguyệt Nga",
-              "Thạch Sanh",
-            ],
-            "Bài 7: Hài kịch": [
-              "Ông Giuốc-đanh mặc lễ phục",
-              "Trưởng giả học làm sang",
-              "Quan thanh tra",
-            ],
-            "Bài 8: Văn bản thuyết minh": [
-              "Một thứ quà của lúa non: Cốm",
-              "Trang phục truyền thống của người Việt",
-              "Nghệ thuật bài chòi",
-            ],
-            "Bài 9: Tổng kết văn học": [
-              "Khái quát văn học dân gian Việt Nam",
-              "Khái quát văn học trung đại Việt Nam",
-              "Khái quát văn học hiện đại Việt Nam",
-            ],
-          },
-          11: {
-            "Bài 1: Truyện ngắn và tiểu thuyết": [
-              "Chí Phèo",
-              "Vợ chồng A Phủ",
-              "Chiếc thuyền ngoài xa",
-            ],
-            "Bài 2: Thơ": ["Vội vàng", "Tràng giang", "Đây thôn Vĩ Dạ"],
-            "Bài 3: Văn bản nghị luận": [
-              "Tinh thần yêu nước của nhân dân ta",
-              "Đức tính giản dị của Bác Hồ",
-              "Ý nghĩa văn chương",
-            ],
-            "Bài 4: Văn bản kí": [
-              "Người lái đò sông Đà",
-              "Ai đã đặt tên cho dòng sông",
-              "Sông Đà",
-            ],
-            "Bài 5: Kịch": [
-              "Hồn Trương Ba, da hàng thịt",
-              "Vĩnh biệt Cửu Trùng Đài",
-              "Quan thanh tra",
-            ],
-            "Bài 6: Văn bản thông tin": [
-              "Thông tin về ngày Trái Đất",
-              "Bảo vệ môi trường biển",
-              "Biến đổi khí hậu",
-            ],
-            "Bài 7: Văn học nước ngoài": [
-              "Số phận con người",
-              "Ông già và biển cả",
-              "Ruồi trâu",
-            ],
-            "Bài 8: Văn học và đời sống": [
-              "Tuyên ngôn độc lập",
-              "Nhật kí trong tù",
-              "Những đứa con trong gia đình",
-            ],
-            "Bài 9: Tổng kết văn học": [
-              "Giá trị nội dung văn học",
-              "Giá trị nghệ thuật văn học",
-              "Văn học và con người",
-            ],
-          },
-          12: {
-            "Bài 1: Khả năng lớn lao của tiểu thuyết": [
-              "Xuân Tóc Đỏ cứu quốc",
-              "Nỗi buồn chiến tranh",
-            ],
-            "Bài 2: Những thế giới thơ": [
-              "Cảm hoài",
-              "Tây Tiến",
-              "Đàn ghi ta của Lor-ca",
-            ],
-            "Bài 3: Lập luận trong văn bản nghị luận": [
-              "Nhìn về vốn văn hóa dân tộc",
-              "Năng lực sáng tạo",
-              "Mấy ý nghĩ về thơ",
-            ],
-            "Bài 4: Yếu tố kì ảo trong truyện kể": [
-              "Hải khẩu linh từ",
-              "Muối của rừng",
-            ],
-            "Bài 5: Tiếng cười của hài kịch": [
-              "Nhân vật quan trọng",
-              "Giấu của",
-            ],
-            "Bài 6: Hồ Chí Minh": [
-              "Tác gia Hồ Chí Minh",
-              "Tuyên ngôn Độc lập",
-              "Mộ; Nguyên tiêu",
-              "Những trò lố hay là Va-ren và Phan Bội Châu",
-            ],
-            "Bài 7: Sự thật trong tác phẩm kí": [
-              "Nghệ thuật băm thịt gà",
-              "Bước vào đời",
-            ],
-            "Bài 8: Dữ liệu trong văn bản thông tin": [
-              "Pa-ra-na",
-              "Giáo dục khai phóng ở Việt Nam",
-              "Đời muối",
-            ],
-            "Bài 9: Văn học và cuộc đời": ["Vội vàng", "Trở về"],
-          },
-        };
+        11: {
+          "Bài 1: Câu chuyện và điểm nhìn trong truyện kể": [
+            "Vợ nhặt (Kim Lân)",
+            "Chí Phèo (Nam Cao)",
+          ],
+          "Bài 2: Cấu tứ và hình ảnh trong thơ trữ tình": [
+            "Nhớ đồng (Tố Hữu)",
+            "Tràng giang (Huy Cận)",
+            "Con đường mùa đông (A.X. Pu-skin)",
+          ],
+          "Bài 3: Cấu trúc của văn bản nghị luận": [
+            "Cầu hiền chiếu (Ngô Thì Nhậm)",
+            "Tôi có một ước mơ (Martin Luther King)",
+            "Một thời đại trong thi ca (Hoài Thanh)",
+          ],
+          "Bài 4: Tự sự trong truyện thơ dân gian và thơ trữ tình": [
+            "Lời tiễn dặn (Truyện thơ dân tộc Thái)",
+            "Dương phụ hành (Cao Bá Quát)",
+            "Thuyền và biển (Xuân Quỳnh)",
+          ],
+          "Bài 5: Nhân vật và xung đột trong bi kịch": [
+            "Sống, hay không sống – đó là vấn đề (Trích Hamlet – Shakespeare)",
+            "Vĩnh biệt Cửu Trùng Đài (Nguyễn Huy Tường)",
+          ],
+          "Bài 6: Nguyễn Du – “Những điều trông thấy mà đau đớn lòng”": [
+            "Tác gia Nguyễn Du",
+            "Trao duyên (Truyện Kiều – Nguyễn Du)",
+            "Độc Tiểu Thanh kí (Nguyễn Du)",
+          ],
+          "Bài 7: Ghi chép và tưởng tượng trong kí": [
+            "Ai đã đặt tên cho dòng sông? (Hoàng Phủ Ngọc Tường)",
+            "“Và tôi vẫn muốn mẹ...” (Svetlana Alexievich)",
+            "Cà Mau quê xứ (Trần Tuấn)",
+          ],
+          "Bài 8: Cấu trúc của văn bản thông tin": [
+            "Nữ phóng viên đầu tiên (Trần Nhật Vy)",
+            "Trí thông minh nhân tạo (Richard Watson)",
+            "Paralympic – Một lịch sử chữa lành những vết thương (Huy Đăng)",
+          ],
+          "Bài 9: Lựa chọn và hành động": [
+            "Bài ca ngất ngưởng (Nguyễn Công Trứ)",
+            "Văn tế nghĩa sĩ Cần Giuộc (Nguyễn Đình Chiểu)",
+            "Cộng đồng và cá thể (Albert Einstein)",
+          ],
+        },
 
-        // Hàm an toàn để parse JSON từ localStorage
-        function safeParse(str) {
-          try {
-            return JSON.parse(str);
-          } catch (e) {
-            console.warn("Dữ liệu localStorage hỏng, reset về mặc định:", e);
-            return {};
-          }
-        }
+        12: {
+          "Bài 1: Khả năng lớn lao của tiểu thuyết": [
+            "Xuân Tóc Đỏ cứu quốc (Vũ Trọng Phụng)",
+            "Nỗi buồn chiến tranh (Bảo Ninh)",
+          ],
+          "Bài 2: Những thế giới thơ": [
+            "Cảm hoài (Đặng Dung)",
+            "Tây Tiến (Quang Dũng)",
+            "Đàn ghi ta của Lor-ca (Thanh Thảo)",
+          ],
+          "Bài 3: Lập luận trong văn bản nghị luận": [
+            "Nhìn về vốn văn hóa dân tộc (Trần Đình Hượu)",
+            "Năng lực sáng tạo (Phan Đình Diệu)",
+            "Mấy ý nghĩ về thơ (Nguyễn Đình Thi)",
+          ],
+          "Bài 4: Yếu tố kì ảo trong truyện kể": [
+            "Hải khẩu linh từ – Đền thiêng của bể (Đoàn Thị Điểm)",
+            "Muối của rừng (Nguyễn Huy Thiệp)",
+          ],
+          "Bài 5: Tiếng cười của hài kịch": [
+            "Nhân vật quan trọng (N. Gô-gôn)",
+            "Giấu của (Lộng Chương)",
+          ],
+          "Bài 6: Hồ Chí Minh – “Văn hóa phải soi đường cho quốc dân đi”": [
+            "Tác gia Hồ Chí Minh",
+            "Tuyên ngôn Độc lập",
+            "Mộ (Chiều tối) – Nguyên tiêu (Rằm tháng Giêng)",
+            "Những trò lố hay là Va-ren và Phan Bội Châu",
+          ],
+          "Bài 7: Sự thật trong tác phẩm kí": [
+            "Nghệ thuật băm thịt gà (Ngô Tất Tố)",
+            "Bước vào đời (Phan Bội Châu)",
+          ],
+          "Bài 8: Dữ liệu trong văn bản thông tin": [
+            "Pa-ra-na (Claude Lévi-Strauss)",
+            "Giáo dục khai phóng ở Việt Nam nhìn từ Đông Kinh Nghĩa Thục (Nguyễn Nam)",
+            "Đời muối (Mark Kurlansky)",
+          ],
+          "Bài 9: Văn học và cuộc đời": [
+            "Vội vàng (Xuân Diệu)",
+            "Trở về (Ernest Hemingway)",
+            "Hồn Trương Ba, da hàng thịt (Lưu Quang Vũ)",
+          ],
+        },
+      };
 
-        const app = document.getElementById("app");
-        const modeBtn = document.getElementById("modeBtn");
+      /* ===== LOAD DATA FROM URL ===== */
+      let DATA_LINKS = {};
+      const hash = location.hash;
+      if (hash.startsWith("#DATA=")) {
+        try {
+          DATA_LINKS = JSON.parse(decodeURIComponent(atob(hash.slice(6))));
+        } catch (e) {}
+      }
 
-        if (!app) {
-          console.error("Không tìm thấy #app!");
-          throw new Error("Không tìm thấy phần tử #app");
-        }
+      /* ===== UI ===== */
+      const app = document.getElementById("app");
+      const modeBtn = document.getElementById("modeBtn");
+      const shareBtn = document.getElementById("shareBtn");
 
-        console.log("Tìm thấy #app, bắt đầu load data...");
+      modeBtn.onclick = () => {
+        MODE = MODE === "student" ? "teacher" : "student";
+        modeBtn.textContent =
+          MODE === "student" ? "🎓 Học sinh" : "🧑‍🏫 Giáo viên";
+        shareBtn.style.display = MODE === "teacher" ? "inline-block" : "none";
+        render();
+      };
 
-        // Load data an toàn
-        let savedLinks = safeParse(localStorage.getItem("links") || "{}");
-        let optionConfig = safeParse(
-          localStorage.getItem("optionConfig") || "{}"
-        );
-        console.log("Loaded data:", savedLinks, optionConfig);
+      shareBtn.onclick = () => {
+        const encoded = btoa(encodeURIComponent(JSON.stringify(DATA_LINKS)));
+        const url = location.origin + location.pathname + "#DATA=" + encoded;
+        prompt("🔗 Copy link này để chia sẻ:", url);
+      };
 
-        /* ===== MODE SWITCH ===== */
-        modeBtn.onclick = () => {
-          MODE = MODE === "student" ? "teacher" : "student";
-          modeBtn.textContent =
-            MODE === "student" ? "🎓 Chế độ: Học sinh" : "🧑‍🏫 Chế độ: Giáo viên";
-          render();
-        };
+      function toggle(box) {
+        box.classList.toggle("show");
+      }
 
-        /* ===== TOGGLE ===== */
-        function toggleBox(box, parent) {
-          const isOpen = box.classList.contains("show");
-          parent
-            .querySelectorAll(":scope > .box, :scope > .options")
-            .forEach((b) => b.classList.remove("show"));
-          if (!isOpen) box.classList.add("show");
-        }
+      /* ===== RENDER ===== */
+      function render() {
+        app.innerHTML = "";
+        for (const grade in STRUCTURE) {
+          const card = document.createElement("div");
+          card.className = "card";
 
-        /* ===== RENDER ===== */
-        function render() {
-          console.log("Render được gọi! MODE:", MODE);
-          app.innerHTML = "";
+          const g = document.createElement("div");
+          g.className = "grade";
+          g.textContent = "📖 Lớp " + grade;
 
-          for (const grade in DATA) {
-            const card = document.createElement("div");
-            card.className = "card";
+          const gbox = document.createElement("div");
+          gbox.className = "box";
+          g.onclick = () => toggle(gbox);
 
-            const gradeTitle = document.createElement("div");
-            gradeTitle.className = "grade";
-            gradeTitle.textContent = "📖 Lớp " + grade;
+          for (const lesson in STRUCTURE[grade]) {
+            const l = document.createElement("div");
+            l.className = "lesson";
+            l.textContent = lesson;
 
-            const gradeBox = document.createElement("div");
-            gradeBox.className = "box";
+            const lbox = document.createElement("div");
+            lbox.className = "box";
+            l.onclick = () => toggle(lbox);
 
-            gradeTitle.onclick = () => gradeBox.classList.toggle("show");
+            STRUCTURE[grade][lesson].forEach((text) => {
+              const t = document.createElement("div");
+              t.className = "text";
+              t.textContent = "📘 " + text;
 
-            for (const lesson in DATA[grade]) {
-              const lessonDiv = document.createElement("div");
-              lessonDiv.className = "lesson";
-              lessonDiv.textContent = lesson;
+              const obox = document.createElement("div");
+              obox.className = "box";
+              t.onclick = () => toggle(obox);
 
-              const lessonBox = document.createElement("div");
-              lessonBox.className = "box";
+              const key = `${grade}-${lesson}-${text}`;
+              DATA_LINKS[key] ||= {};
 
-              lessonDiv.onclick = () => toggleBox(lessonBox, gradeBox);
+              OPTIONS.forEach((opt) => {
+                const row = document.createElement("div");
+                row.className = "option";
 
-              DATA[grade][lesson].forEach((text) => {
-                const textDiv = document.createElement("div");
-                textDiv.className = "text";
-                textDiv.textContent = "📘 " + text;
+                if (MODE === "teacher") {
+                  row.innerHTML = `
+              ${opt.label}
+              <input type="text" placeholder="Nhập link..."
+              value="${DATA_LINKS[key][opt.key] || ""}">
+            `;
+                  row.querySelector("input").oninput = (e) => {
+                    DATA_LINKS[key][opt.key] = e.target.value.trim();
+                  };
+                } else {
+                  const link = DATA_LINKS[key][opt.key];
+                  row.innerHTML = link
+                    ? `<a href="${link}" target="_blank">${opt.label}</a>`
+                    : `<span style="opacity:.4">${opt.label}</span>`;
+                }
 
-                const optionBox = document.createElement("div");
-                optionBox.className = "options";
-
-                textDiv.onclick = () => toggleBox(optionBox, lessonBox);
-
-                const keyBase = `${grade}-${lesson}-${text}`;
-                savedLinks[keyBase] = savedLinks[keyBase] || {};
-                optionConfig[keyBase] = optionConfig[keyBase] || {
-                  enabled: OPTIONS.map((o) => o.key),
-                };
-
-                OPTIONS.forEach((opt) => {
-                  if (
-                    MODE === "student" &&
-                    !optionConfig[keyBase].enabled.includes(opt.key)
-                  )
-                    return;
-
-                  const row = document.createElement("div");
-                  row.className = "option";
-                  row.onclick = (e) => e.stopPropagation();
-
-                  if (MODE === "teacher") {
-                    const checked = optionConfig[keyBase].enabled.includes(
-                      opt.key
-                    );
-
-                    row.innerHTML = `
-                <label>
-                  <input type="checkbox" ${checked ? "checked" : ""}>
-                  ${opt.label}
-                </label><br>
-                <input type="text" placeholder="Nhập link..." value="${
-                  savedLinks[keyBase][opt.key] || ""
-                }">
-              `;
-
-                    const checkbox = row.querySelector("input[type=checkbox]");
-                    const input = row.querySelector("input[type=text]");
-
-                    checkbox.onchange = () => {
-                      let list = optionConfig[keyBase].enabled;
-                      if (checkbox.checked && !list.includes(opt.key)) {
-                        list.push(opt.key);
-                      }
-                      if (!checkbox.checked) {
-                        list = list.filter((k) => k !== opt.key);
-                      }
-                      optionConfig[keyBase].enabled = list;
-                      localStorage.setItem(
-                        "optionConfig",
-                        JSON.stringify(optionConfig)
-                      );
-                      render();
-                    };
-
-                    input.onchange = (e) => {
-                      savedLinks[keyBase][opt.key] = e.target.value.trim();
-                      localStorage.setItem("links", JSON.stringify(savedLinks));
-                    };
-                  } else {
-                    const link = savedLinks[keyBase][opt.key];
-                    row.innerHTML = link
-                      ? `<a href="${link}" target="_blank">${opt.label}</a>`
-                      : `<span style="opacity:.5">${opt.label}</span>`;
-                  }
-
-                  optionBox.appendChild(row);
-                });
-
-                lessonBox.appendChild(textDiv);
-                lessonBox.appendChild(optionBox);
+                obox.appendChild(row);
               });
 
-              gradeBox.appendChild(lessonDiv);
-              gradeBox.appendChild(lessonBox);
-            }
+              lbox.appendChild(t);
+              lbox.appendChild(obox);
+            });
 
-            card.appendChild(gradeTitle);
-            card.appendChild(gradeBox);
-            app.appendChild(card);
+            gbox.appendChild(l);
+            gbox.appendChild(lbox);
           }
 
-          console.log("Render hoàn thành!");
-        }
-
-        render();
-      } catch (error) {
-        console.error("Lỗi trong script:", error);
-        if (app) {
-          app.innerHTML = `<p style="color: red; font-weight: bold; text-align: center; padding: 20px;">
-      LỖI: ${error.message || "Không xác định"}<br>
-      Hãy mở F12 → Application → Local Storage → Clear domain này, rồi refresh lại.
-    </p>`;
+          card.appendChild(g);
+          card.appendChild(gbox);
+          app.appendChild(card);
         }
       }
+
+      render();
     </script>
   </body>
 </html>
-
